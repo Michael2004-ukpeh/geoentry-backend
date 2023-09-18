@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const generateToken = require('../utils/generateToken');
+const bcrypt = require('bcryptjs');
+const { parse } = require('dotenv');
 
 const register = asyncHandler(async (req, res, next) => {
   try {
@@ -44,7 +46,7 @@ const register = asyncHandler(async (req, res, next) => {
 const login = asyncHandler(async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email: email }).select('+password');
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
     if (user && isCorrectPassword) {

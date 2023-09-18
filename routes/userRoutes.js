@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.route('/register').post(userControllers.register);
 
-router.route('/login').post(geoValidate, userControllers.login);
+router.route('/login').post(userControllers.login);
 
-router.route('/getMe').get(protect, geoValidate, userControllers.getMe);
+router.route('/getMe').get(protect, userControllers.getMe);
 
 module.exports = router;

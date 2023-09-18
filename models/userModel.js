@@ -40,6 +40,9 @@ const userSchema = new mongoose.Schema(
     },
   }
 );
+userSchema.methods.correctPassword = async (plainPassword, hashedPassword) => {
+  return await bcrypt.compare(plainPassword, hashedPassword);
+};
 
 userSchema.pre('save', async function (next) {
   if (this.isNew === true) {

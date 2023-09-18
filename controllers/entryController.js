@@ -28,7 +28,7 @@ const signOut = asyncHandler(async (req, res, next) => {
         new: true,
         runValidators: true,
       }
-    );
+    ).populate('user');
     res.status(200).json({
       status: 'success',
       message: 'Employee signed out',
@@ -50,7 +50,8 @@ const getAllEntries = asyncHandler(async (req, res, next) => {
         $gte: today, // Greater than or equal to the start of the day
         $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Less than the start of the next day
       },
-    });
+    }).populate('user');
+
     res.status(200).json({
       status: 'success',
       message: 'Entries fetched',
@@ -64,7 +65,7 @@ const getAllEntries = asyncHandler(async (req, res, next) => {
 
 const getEntry = asyncHandler(async (req, res, next) => {
   try {
-    const entry = await Entry.findOne({ _id: req.params.id });
+    const entry = await Entry.findOne({ _id: req.params.id }).populate('user');
     res.status(200).json({
       status: 'success',
       message: 'Entries fetched',

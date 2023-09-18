@@ -35,10 +35,6 @@ entrySchema.post('save', async function () {
   this.signedOutAt = this.updatedAt;
 });
 
-entrySchema.pre(/^findOneAnd/, async function () {
-  this.user.populate();
-});
-
 const Entry = mongoose.model('Entry', entrySchema, 'entrys');
 
 module.exports = Entry;
