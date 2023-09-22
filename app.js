@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cors = require('cors');
 const connectDB = require('./db/db');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const userRoutes = require('./routes/userRoutes');
@@ -18,6 +19,7 @@ process.on('uncaughtException', (err) => {
 });
 
 const PORT = process.env.PORT || 7000;
+app.use(cors());
 app.use(express.json());
 app.set('trust proxy', true);
 // Use Mogan to log api request in development mode
