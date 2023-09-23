@@ -53,7 +53,7 @@ const login = asyncHandler(async (req, res, next) => {
       res.status(200).json({
         status: 'true',
         message: 'user logged in',
-        data: user,
+        data: { ...user._doc, token: generateToken(user._id) },
       });
     } else {
       res.status(400);
