@@ -34,6 +34,9 @@ const entrySchema = new mongoose.Schema(
 entrySchema.post('save', async function () {
   this.signedOutAt = this.updatedAt;
 });
+entrySchema.pre('save', async function () {
+  this.populate('user');
+});
 
 const Entry = mongoose.model('Entry', entrySchema, 'entrys');
 
