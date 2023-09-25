@@ -45,7 +45,7 @@ const getAllEntries = asyncHandler(async (req, res, next) => {
   today.setHours(0, 0, 0, 0);
 
   try {
-    const entries = await Entry.findOne({
+    const entries = await Entry.find({
       createdAt: {
         $gte: today, // Greater than or equal to the start of the day
         $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Less than the start of the next day
