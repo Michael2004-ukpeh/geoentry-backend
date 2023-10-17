@@ -6,11 +6,11 @@ const entryControllers = require('../controllers/entryController');
 router
   .route('/')
   .get(protect, entryControllers.getAllEntries)
-  .post(protect, entryControllers.signIn);
+  .post(protect, geoValidate, entryControllers.signIn);
 
 router
   .route('/:id')
-  .patch(protect, entryControllers.signOut)
+  .patch(protect, geoValidate, entryControllers.signOut)
   .get(protect, entryControllers.getEntry);
 
 module.exports = router;
