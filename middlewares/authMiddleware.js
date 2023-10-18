@@ -47,16 +47,12 @@ const geoValidate = asyncHandler(async (req, res, next) => {
     const { result } = await geovalidator.validateLocation(
       clientIpCoord,
       {
-        latitude: process.env.MY_OFFICE_LATITUDE,
-        longitude: process.env.MY_OFFICE_LONGITUDE,
+        latitude: +process.env.MY_OFFICE_LATITUDE,
+        longitude: +process.env.MY_OFFICE_LONGITUDE,
       },
       10000
     );
-    console.log('office:', {
-      latitude: process.env.MY_OFFICE_LATITUDE,
-      longitude: process.env.MY_OFFICE_LONGITUDE,
-    });
-    console.log(result);
+
     if (result) {
       next();
     } else {
