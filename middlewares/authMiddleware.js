@@ -50,7 +50,7 @@ const geoValidate = asyncHandler(async (req, res, next) => {
         latitude: process.env.MY_OFFICE_LATITUDE,
         longitude: process.env.MY_OFFICE_LONGITUDE,
       },
-      500
+      0
     );
     console.log(result);
     if (result) {
